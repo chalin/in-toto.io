@@ -25,6 +25,7 @@
     "clean": "rm -Rf public",
     "fix:filenames": "npm run _filenames-to-kebab-case",
     "fix:format": "npm run _check:format -- --write",
+    "fix": "npm run fix:filenames && npm run fix:format",
     "get:submodule": "npm run _get:${GET:-submodule}",
     "make:public": "git init -b main public",
     "postbuild:preview": "npm run _check:links--warn",
@@ -34,25 +35,26 @@
     "prepare": "npm run seq -- get:submodule _prepare:docsy",
     "seq": "bash -c 'for cmd in \"$@\"; do npm run $cmd || exit 1; done' - ",
     "serve": "npm run _serve",
-    "test": "npm run seq -- check:filenames check:format check:links",
+    "test:only": "npm run seq -- check:filenames check:format check:links",
+    "test": "echo 'RUNNING FIX AND TESTS...'; npm run fix && npm run test:only",
     "update:packages": "npx npm-check-updates -u"
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.20",
-    "cspell": "^8.16.0",
-    "hugo-extended": "0.139.0",
-    "postcss-cli": "^11.0.0",
-    "prettier": "^3.3.3"
+    "autoprefixer": "^10.4.21",
+    "cspell": "^9.2.2",
+    "hugo-extended": "0.152.2",
+    "postcss-cli": "^11.0.1",
+    "prettier": "^3.6.2"
   },
   "optionalDependencies": {
-    "netlify-cli": "^17.37.2",
-    "npm-check-updates": "^17.1.11"
+    "netlify-cli": "^23.9.5",
+    "npm-check-updates": "^19.1.2"
   },
   "enginesComment": "Ensure that engines.node value stays consistent with the project's .nvmrc",
   "engines": {
-    "node": "22.x"
+    "node": "24.x"
   },
-  "gitHubActionCacheKey": "2024-07-02 - change this key to force cache refresh",
+  "gitHubActionCacheKey": "2025-10-28-v1",
   "private": true,
   "prettier": {
     "proseWrap": "always",
